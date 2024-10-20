@@ -9,20 +9,34 @@ import androidx.navigation.navArgument
 import com.example.navegacion.views.DetailView
 import com.example.navegacion.views.HomeView
 
+import com.example.navegacion.views.ThirdView
+
 @Composable
-fun NavManager(){
+fun NavManager() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "Home"  ){
-        composable("Home"){
+    NavHost(navController = navController, startDestination = "Home") {
+        composable("Home") {
             HomeView(navController)
         }
-        composable("Detail/{id}/?{opcional}", arguments = listOf(
-            navArgument("id") { type = NavType.IntType },
-            navArgument("opcional") { type = NavType.StringType },
-        )){
+        composable(
+            "Detail/{id}/?{opcional}",
+            arguments = listOf(
+                navArgument("id") { type = NavType.IntType },
+                navArgument("opcional") { type = NavType.StringType },
+            )
+        ) {
             val id = it.arguments?.getInt("id") ?: 0
             val opcional = it.arguments?.getString("opcional") ?: ""
             DetailView(navController, id, opcional)
+        }
+        composable(
+            "Third/{opcional}",
+            arguments = listOf(
+                navArgument("opcional") { type = NavType.StringType },
+            )
+        ) {
+            val opcional = it.arguments?.getString("opcional") ?: ""
+            ThirdView(navController, opcional)
         }
     }
 }

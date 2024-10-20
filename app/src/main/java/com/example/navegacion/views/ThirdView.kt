@@ -27,13 +27,13 @@ import com.example.navegacion.components.TitleView
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun DetailView(navController: NavController, id: Int, opcional: String?) {
+fun ThirdView(navController: NavController, opcional: String?) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { TitleBar(name = "Detail view") },
+                title = { TitleBar(name = "Third View") },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = Color.Blue
+                    containerColor = Color.Green
                 ),
                 navigationIcon = {
                     MainIconButton(icon = Icons.Default.ArrowBack) {
@@ -43,35 +43,22 @@ fun DetailView(navController: NavController, id: Int, opcional: String?) {
             )
         }
     ) {
-        ContentDetailView(navController, id, opcional)
+        ContentThirdView(navController, opcional)
     }
 }
 
 @Composable
-fun ContentDetailView(navController: NavController, id: Int, opcional: String?) {
+fun ContentThirdView(navController: NavController, opcional: String?) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TitleView(name = "Detail View")
+        TitleView(name = "Third View")
         Space()
-        TitleView(name = id.toString())
-        Space()
-        if (opcional == "") {
-            Spacer(modifier = Modifier.height(0.dp))
-        } else {
-            TitleView(name = opcional.orEmpty())
-        }
-        MainButton(name = "Return home", backColor = Color.Blue, color = Color.White) {
+        TitleView(name = opcional.orEmpty())
+        MainButton(name = "Return home", backColor = Color.Green, color = Color.White) {
             navController.popBackStack()
-        }
-        Space()
-        MainButton(name = "Go to Third View", backColor = Color.Blue, color = Color.White) {
-            navController.navigate("Third/$opcional")
         }
     }
 }
-
-
-
